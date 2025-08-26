@@ -28,6 +28,7 @@ import {
   type FullSpecialistProfile,
 } from "@/lib/database"
 import { LogOut, Mail, AlertCircle, Paperclip, X, Search } from "lucide-react"
+import { LogOut, Mail, AlertCircle, Search } from "lucide-react"
 
 const lithuanianCities = [
   "Vilnius",
@@ -55,7 +56,6 @@ export default function SpecialistsPage() {
   const [selectedEmails, setSelectedEmails] = useState<string[]>([])
   const [mailtoLink, setMailtoLink] = useState("")
   const [error, setError] = useState("")
-  const [attachedFiles, setAttachedFiles] = useState<File[]>([])
   const [selectedServices, setSelectedServices] = useState<Record<string, string[]>>({})
   const [specialistsToShow, setSpecialistsToShow] = useState(6)
   const [searchTerm, setSearchTerm] = useState("")
@@ -195,30 +195,14 @@ export default function SpecialistsPage() {
     if (selectedEmails.length > 0 && message.trim()) {
       const to = selectedEmails.join(";")
       const subject = t("inquiryFromInTouch")
-      let body = message
-
-      // Add file attachment instructions to the message body
-      if (attachedFiles.length > 0) {
-        body += "\n\n" + t("attachedFilesNote") + "\n"
-        attachedFiles.forEach((file, index) => {
-          body += `${index + 1}. ${file.name}\n`
-        })
-      }
-
-      // Add file attachment instructions to the message body
-      if (attachedFiles.length > 0) {
-        body += "\n\n" + t("attachedFilesNote") + "\n"
-        attachedFiles.forEach((file, index) => {
-          body += `${index + 1}. ${file.name}\n`
-        })
-      }
+      const body = message
 
       const link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
       setMailtoLink(link)
     } else {
       setMailtoLink("")
     }
-  }, [selectedEmails, message, attachedFiles, t])
+  }, [selectedEmails, message, t])
 
   // Handle search input changes
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -359,17 +343,6 @@ export default function SpecialistsPage() {
     if (mailtoLink) {
       window.open(mailtoLink, "_blank")
     }
-  }
-
-  const handleFileAttachment = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files
-    if (files) {
-      setAttachedFiles((prev) => [...prev, ...Array.from(files)])
-    }
-  }
-
-  const removeAttachment = (index: number) => {
-    setAttachedFiles((prev) => prev.filter((_, i) => i !== index))
   }
 
   const handleServiceToggle = (category: string, service: string) => {
@@ -750,56 +723,6 @@ export default function SpecialistsPage() {
                 }}
                 placeholder={t("yourMessage")}
               />
-
-              {/* File Attachment Section */}
-              <div className="space-y-3">
-                <div className="flex items-center gap-2">
-                  <input
-                    type="file"
-                    id="file-attachment"
-                    multiple
-                    className="hidden"
-                    onChange={handleFileAttachment}
-                    accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif"
-                  />
-                  <Button
-                    type="button"
-                    variant="outline"
-                    size="sm"
-                    onClick={() => document.getElementById("file-attachment")?.click()}
-                  >
-                    <Paperclip className="h-4 w-4 mr-2" />
-                    {t("attachFiles")}
-                  </Button>
-                  {attachedFiles.length > 0 && (
-                    <span className="text-sm text-gray-600">{t("filesAttached", { count: attachedFiles.length })}</span>
-                  )}
-                </div>
-
-                {/* Display attached files */}
-                {attachedFiles.length > 0 && (
-                  <div className="space-y-2">
-                    {attachedFiles.map((file, index) => (
-                      <div key={index} className="flex items-center justify-between bg-gray-50 p-2 rounded border">
-                        <div className="flex items-center space-x-2">
-                          <Paperclip className="h-4 w-4 text-gray-500" />
-                          <span className="text-sm font-medium truncate">{file.name}</span>
-                          <span className="text-xs text-gray-500">({(file.size / 1024).toFixed(1)} KB)</span>
-                        </div>
-                        <Button
-                          type="button"
-                          variant="ghost"
-                          size="sm"
-                          onClick={() => removeAttachment(index)}
-                          className="h-6 w-6 p-0"
-                        >
-                          <X className="h-3 w-3" />
-                        </Button>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
 
               <Button
                 onClick={handleSendMessage}

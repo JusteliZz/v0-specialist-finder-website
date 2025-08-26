@@ -199,9 +199,7 @@ export const translations = {
     pleaseEnterMessage: "Please enter a message",
     pleaseSelectRecipients: "Please select at least one recipient",
     attachFiles: "Attach Files",
-    filesAttached: "{{count}} files attached",
     openInEmailClient: "Open in Email Client",
-    attachedFilesNote: "Please attach the following files to your email:",
     inquiryFromInTouch: "Inquiry from InTouch",
 
     // Errors and Validation
@@ -607,9 +605,7 @@ export const translations = {
     pleaseEnterMessage: "Prašome įvesti žinutę",
     pleaseSelectRecipients: "Prašome pasirinkti bent vieną gavėją",
     attachFiles: "Pridėti failus",
-    filesAttached: "Pridėta failų: {{count}}",
     openInEmailClient: "Atidaryti el. pašto kliente",
-    attachedFilesNote: "Prašome pridėti šiuos failus prie el. laiško:",
     inquiryFromInTouch: "Užklausa iš InTouch",
 
     // Errors and Validation
