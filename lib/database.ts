@@ -60,7 +60,6 @@ export const serviceCategories = {
     "Padangos, ratlankiai",
     "Sunkveržimių pardavimas, dalys",
     "Tepalai, alyvos",
-    "Transporto paslaugos",
     "Vandens transportas",
   ],
   "Energetika, žaliavos, kuras": [
