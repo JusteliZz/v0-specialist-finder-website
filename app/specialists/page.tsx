@@ -171,6 +171,7 @@ export default function SpecialistsPage() {
       const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
       setSelectedEmails(allFilteredEmails)
     }
+  }, [allSpecialists, filteredSpecialists, selectedEmails.length])
 
   useEffect(() => {
     if (selectedEmails.length > 0 && message.trim()) {
