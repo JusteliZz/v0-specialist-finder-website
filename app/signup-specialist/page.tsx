@@ -321,7 +321,7 @@ export default function SpecialistSignupPage() {
                 <div className="space-y-4">
                   <Label className="text-base font-semibold">{t("serviceCategories")}</Label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    {serviceCategories.map((category) => (
+                    {Object.keys(serviceCategories).map((category) => (
                       <div key={category} className="space-y-2">
                         <div className="flex items-center space-x-2">
                           <Checkbox
