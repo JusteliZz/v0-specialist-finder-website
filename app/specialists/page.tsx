@@ -186,11 +186,9 @@ export default function SpecialistsPage() {
   }, [allSpecialists, searchTerm, selectedCategories, specialistType, selectedCities, selectedServices])
 
   useEffect(() => {
-    // Only auto-select all filtered specialists on initial load when no selections have been made
-    if (selectedEmails.length === 0 && filteredSpecialists.length > 0) {
-      const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
-      setSelectedEmails(allFilteredEmails)
-    }
+    // Auto-select all filtered specialists whenever filters change
+    const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
+    setSelectedEmails(allFilteredEmails)
   }, [filteredSpecialists])
 
   useEffect(() => {
