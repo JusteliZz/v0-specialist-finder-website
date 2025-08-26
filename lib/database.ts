@@ -68,7 +68,6 @@ export const serviceCategories = {
     "Logistikos paslaugos",
     "Motociklai",
     "Oro transportas, aviacija",
-    "Padangos, ratlankiai",
     "Pagalba kelyje",
     "Sunkveržimių pardavimas, dalys",
     "Tepalai, alyvos",
