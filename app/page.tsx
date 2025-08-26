@@ -124,17 +124,21 @@ export default function HomePage() {
       </main>
 
       {/* Simple Subscription Buttons */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-t">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gray-50">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
-            {language === "lt" ? "Pasirinkite savo planą" : "Choose Your Plan"}
+          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+            {language === "lt" ? "Pasiruošę pradėti?" : "Ready to get started?"}
           </h2>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <p className="text-lg text-blue-600 mb-10 font-medium">
+            {language === "lt" 
+              ? "Prisijunkite prie tūkstančių patenkintų klientų ir specialistų" 
+              : "Join thousands of satisfied customers and specialists"}
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
             <Link href="/signup">
               <Button
                 size="lg"
-                variant="outline"
-                className="text-blue-600 border-blue-600 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl"
+                className="bg-green-600 hover:bg-green-700 text-white text-lg px-10 py-4 rounded-lg font-semibold shadow-lg hover:shadow-xl transition-all duration-200"
               >
                 {language === "lt" ? "Pradėti nemokamai" : "Start Free"}
               </Button>
@@ -142,12 +146,18 @@ export default function HomePage() {
             <Link href="/dashboard/subscription">
               <Button
                 size="lg"
-                className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6 rounded-xl"
+                variant="outline"
+                className="text-blue-600 border-2 border-blue-600 hover:bg-blue-50 text-lg px-10 py-4 rounded-lg font-semibold transition-all duration-200"
               >
-                {language === "lt" ? "Peržiūrėti planus" : "View Plans"}
+                {language === "lt" ? "Peržiūrėti prenumeratos planus" : "View subscription plans"}
               </Button>
             </Link>
           </div>
+          <p className="text-sm text-gray-500">
+            {language === "lt" 
+              ? "Kredito kortelė nereikalinga • Registracija bet kada" 
+              : "No credit card required • Register anytime"}
+          </p>
         </div>
       </section>
 
