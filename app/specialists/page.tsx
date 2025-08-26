@@ -84,6 +84,44 @@ export default function SpecialistsPage() {
 
     const suggestions = allSpecialists
       .filter((specialist) => {
+        // First apply the same filters as main filtering
+        const categoryMatch =
+          selectedCategories.length === 0 ||
+          selectedCategories.some((selectedCat) => specialist.categories.includes(selectedCat))
+
+        const typeMatch = specialist.type === specialistType
+
+        const cityMatch =
+          selectedCities.length === 0 ||
+          specialist.locations.length === 0 || // Specialist works in All Lithuania
+          selectedCities.some((selectedCity) => specialist.locations.includes(selectedCity))
+
+        // Service-specific filtering
+        let serviceMatch = true
+        if (selectedCategories.length > 0) {
+          const categoryHasSelectedServices = selectedCategories.some(
+            (cat) => selectedServices[cat] && selectedServices[cat].length > 0,
+          )
+
+          if (categoryHasSelectedServices) {
+            const hasMatchingCategory = selectedCategories.some((cat) => specialist.categories.includes(cat))
+            if (hasMatchingCategory) {
+              const relevantServices = selectedCategories
+                .filter((cat) => specialist.categories.includes(cat))
+                .flatMap((cat) => selectedServices[cat] || [])
+
+              if (relevantServices.length > 0) {
+                serviceMatch = relevantServices.some((service) => specialist.services.includes(service))
+              }
+            }
+          }
+        }
+
+        if (!categoryMatch || !typeMatch || !cityMatch || !serviceMatch) {
+          return false
+        }
+
+        // Then apply search term match
         const fullName =
           specialist.type === "business"
             ? specialist.companyName?.toLowerCase() || ""
@@ -107,7 +145,7 @@ export default function SpecialistsPage() {
       }))
 
     return suggestions
-  }, [allSpecialists, searchTerm, selectedEmails])
+  }, [allSpecialists, searchTerm, selectedEmails, selectedCategories, specialistType, selectedCities, selectedServices])
 
 
   const filteredSpecialists = useMemo(() => {
