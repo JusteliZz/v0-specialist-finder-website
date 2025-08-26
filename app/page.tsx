@@ -8,7 +8,7 @@ import { useAuth } from "@/lib/auth-context"
 import { Send, Clock, Search, Zap } from "lucide-react"
 
 export default function HomePage() {
-  const { t } = useLanguage()
+  const { t, language = 'en' } = useLanguage()
   const { user } = useAuth()
 
   const howItWorksSteps = [
