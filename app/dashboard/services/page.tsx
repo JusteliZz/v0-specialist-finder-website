@@ -15,10 +15,8 @@ import { useLanguage } from "@/lib/language-context"
 import { useAuth } from "@/lib/auth-context"
 import {
   db,
-  individualServiceCategories,
-  businessServiceCategories,
-  individualPredefinedServices,
-  businessPredefinedServices,
+  serviceCategories,
+  predefinedServices,
 } from "@/lib/database"
 import { ArrowLeft, Plus, Trash2, Save, CheckCircle } from "lucide-react"
 
@@ -54,15 +52,11 @@ export default function ServicesPage() {
 
   // Get the appropriate categories and services based on user role
   const getServiceCategories = () => {
-    if (user?.role === "individual_specialist") return individualServiceCategories
-    if (user?.role === "business_specialist") return businessServiceCategories
-    return []
+    return serviceCategories
   }
 
   const getPredefinedServices = () => {
-    if (user?.role === "individual_specialist") return individualPredefinedServices
-    if (user?.role === "business_specialist") return businessPredefinedServices
-    return {}
+    return predefinedServices
   }
 
   const handleServiceToggle = (service: string) => {

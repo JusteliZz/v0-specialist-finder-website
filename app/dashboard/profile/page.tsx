@@ -16,10 +16,8 @@ import { useLanguage } from "@/lib/language-context"
 import { useAuth } from "@/lib/auth-context"
 import {
   db,
-  individualServiceCategories,
-  businessServiceCategories,
-  individualPredefinedServices,
-  businessPredefinedServices,
+  serviceCategories,
+  predefinedServices,
 } from "@/lib/database"
 import { Loader2, Save, ArrowLeft, CheckCircle } from "lucide-react"
 
@@ -94,15 +92,11 @@ export default function ProfilePage() {
 
   // Get the appropriate categories and services based on user role
   const getServiceCategories = () => {
-    if (user?.role === "individual_specialist") return individualServiceCategories
-    if (user?.role === "business_specialist") return businessServiceCategories
-    return []
+    return serviceCategories
   }
 
   const getPredefinedServices = () => {
-    if (user?.role === "individual_specialist") return individualPredefinedServices
-    if (user?.role === "business_specialist") return businessPredefinedServices
-    return {}
+    return predefinedServices
   }
 
   const handleInputChange = (field: string, value: any) => {
