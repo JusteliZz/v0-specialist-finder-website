@@ -14,7 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { LanguageSelector } from "@/components/language-selector"
 import { useLanguage } from "@/lib/language-context"
 import { useAuth } from "@/lib/auth-context"
-import { db, serviceCategories, type FullSpecialistProfile } from "@/lib/database"
+import { db, serviceCategories, predefinedServices, type FullSpecialistProfile } from "@/lib/database"
 import { ArrowLeft, Send, Mail, CheckCircle } from "lucide-react"
 
 const lithuanianCities = [

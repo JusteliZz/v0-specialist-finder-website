@@ -102,8 +102,6 @@ export default function ServicesPage() {
 
   if (!user || user.role === "customer") return null
 
-  const serviceCategories = getServiceCategories()
-  const predefinedServices = getPredefinedServices()
 
   return (
     <div className="min-h-screen bg-gray-50">

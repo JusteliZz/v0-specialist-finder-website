@@ -192,8 +192,6 @@ export default function ProfilePage() {
 
   if (!user) return null
 
-  const serviceCategories = getServiceCategories()
-  const predefinedServices = getPredefinedServices()
 
   return (
     <div className="min-h-screen bg-gray-50">

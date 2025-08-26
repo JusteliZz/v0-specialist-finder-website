@@ -336,14 +336,14 @@ export default function SpecialistSignupPage() {
 
                         {/* Show services for selected category */}
                         {formData.selectedCategories.includes(category) &&
-                          individualPredefinedServices[category as keyof typeof individualPredefinedServices] &&
-                          individualPredefinedServices[category as keyof typeof individualPredefinedServices].length > 0 && (
+                          predefinedServices[category as keyof typeof predefinedServices] &&
+                          predefinedServices[category as keyof typeof predefinedServices].length > 0 && (
                             <div className="ml-3 p-2 bg-blue-50 rounded border">
                               <Label className="text-xs font-medium mb-1 block">
                                 {t("specificServicesIn")} {t(category as any)}:
                               </Label>
                               <div className="grid grid-cols-1 gap-1">
-                                {individualPredefinedServices[category as keyof typeof individualPredefinedServices].map((service) => (
+                                {predefinedServices[category as keyof typeof predefinedServices].map((service) => (
                                   <div key={service} className="flex items-center space-x-2">
                                     <Checkbox
                                       id={`service-${category}-${service}`}
