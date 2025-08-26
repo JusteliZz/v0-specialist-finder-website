@@ -27,7 +27,6 @@ import {
   businessPredefinedServices,
   type FullSpecialistProfile,
 } from "@/lib/database"
-import { LogOut, Mail, AlertCircle, Paperclip, X, Search } from "lucide-react"
 import { LogOut, Mail, AlertCircle, Search } from "lucide-react"
 
 const lithuanianCities = [
