@@ -123,6 +123,34 @@ export default function HomePage() {
         </section>
       </main>
 
+      {/* Simple Subscription Buttons */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white border-t">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+            {language === "lt" ? "Pasirinkite savo planą" : "Choose Your Plan"}
+          </h2>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link href="/signup">
+              <Button
+                size="lg"
+                variant="outline"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl"
+              >
+                {language === "lt" ? "Pradėti nemokamai" : "Start Free"}
+              </Button>
+            </Link>
+            <Link href="/dashboard/subscription">
+              <Button
+                size="lg"
+                className="bg-blue-600 hover:bg-blue-700 text-white text-lg px-8 py-6 rounded-xl"
+              >
+                {language === "lt" ? "Peržiūrėti planus" : "View Plans"}
+              </Button>
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* Subscription Section */}
       <section className="py-24 px-4 sm:px-6 lg:px-8 bg-gray-100">
         <div className="max-w-6xl mx-auto">
