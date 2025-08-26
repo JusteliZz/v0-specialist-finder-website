@@ -143,7 +143,7 @@ export default function HomePage() {
                 {language === "lt" ? "Pradėti nemokamai" : "Start Free"}
               </Button>
             </Link>
-            <Link href="/dashboard/subscription">
+            <Link href="/subscription">
               <Button
                 size="lg"
                 variant="outline"
