@@ -1,6 +1,8 @@
 "use client"
 
+import { useEffect } from "react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { LanguageSelector } from "@/components/language-selector"
 import { useLanguage } from "@/lib/language-context"
@@ -10,6 +12,23 @@ import { Send, Clock, Search, Zap } from "lucide-react"
 export default function HomePage() {
   const { t, language = 'en' } = useLanguage()
   const { user } = useAuth()
+  const router = useRouter()
+
+  // Redirect logged-in users to appropriate page
+  useEffect(() => {
+    if (user) {
+      if (user.role === "customer") {
+        router.push("/specialists")
+      } else {
+        router.push("/dashboard")
+      }
+    }
+  }, [user, router])
+
+  // Don't render the page if user is logged in (will redirect)
+  if (user) {
+    return null
+  }
 
   const howItWorksSteps = [
     {
