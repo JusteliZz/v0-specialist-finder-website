@@ -64,7 +64,6 @@ export const serviceCategories = {
     "Autosavartynas, naudotos dalys",
     "Dviračiai, paspirtukai",
     "Ekspedijavimas",
-    "Geležinkelių transportas",
     "Logistikos paslaugos",
     "Motociklai",
     "Oro transportas, aviacija",
