@@ -591,3 +591,5 @@ export const db = {
 
 // This is the type that will be returned from the joined query
 export type FullSpecialistProfile = Awaited<ReturnType<typeof db.specialists.getAll>>[0]
+
+export { serviceCategories, predefinedServices }

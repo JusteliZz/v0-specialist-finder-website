@@ -362,7 +362,7 @@ export default function SpecialistsPage() {
     return null
   }
 
-  const serviceCategoriesForDisplay = serviceCategories.map((category) => ({
+  const serviceCategoriesForDisplay = Object.keys(serviceCategories).map((category) => ({
     key: category,
     label: t(category as any),
   }))
