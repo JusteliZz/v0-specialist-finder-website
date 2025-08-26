@@ -27,7 +27,10 @@ import {
   businessPredefinedServices,
   type FullSpecialistProfile,
 } from "@/lib/database"
-import { LogOut, Mail, AlertCircle, Search } from "lucide-react"
+import { LogOut } from "lucide-react/dist/esm/icons/log-out"
+import { Mail } from "lucide-react/dist/esm/icons/mail"
+import { AlertCircle } from "lucide-react/dist/esm/icons/alert-circle"
+import { Search } from "lucide-react/dist/esm/icons/search"
 
 const lithuanianCities = [
   "Vilnius",
