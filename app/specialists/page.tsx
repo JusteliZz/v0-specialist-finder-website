@@ -166,10 +166,10 @@ export default function SpecialistsPage() {
   }, [allSpecialists, searchTerm, selectedCategories, specialistType, selectedCities, selectedServices])
 
   useEffect(() => {
-    // Auto-select all filtered specialists only when filters change (not search)
+    // Auto-select all filtered specialists when filters change or when specialists are first loaded
     const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
     setSelectedEmails(allFilteredEmails)
-  }, [selectedCategories, specialistType, selectedCities, selectedServices]) // Removed filteredSpecialists dependency
+  }, [filteredSpecialists]) // Include filteredSpecialists to auto-select when data loads or filters change
 
   useEffect(() => {
     if (selectedEmails.length > 0 && message.trim()) {
