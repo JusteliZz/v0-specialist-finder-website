@@ -63,7 +63,6 @@ export default function SpecialistSignupPage() {
     confirmPassword: "",
     firstName: "",
     lastName: "",
-    profession: "",
     selectedCategories: [] as string[],
     selectedCities: [] as string[],
     selectedServices: [] as string[],
@@ -149,10 +148,6 @@ export default function SpecialistSignupPage() {
       return false
     }
 
-    if (!formData.profession.trim()) {
-      setError("Prašome įvesti profesiją")
-      return false
-    }
 
     if (formData.selectedCategories.length === 0) {
       setError(t("pleaseSelectCategory"))
@@ -199,7 +194,7 @@ export default function SpecialistSignupPage() {
       await db.specialists.createProfile({
         userId: newUser.id,
         type: "individual",
-        profession: formData.profession,
+      profession: formData.selectedCategories[0] || "Specialistas", // Use first category as profession
         categories: formData.selectedCategories,
         locations: formData.selectedCities,
         phone: "",
@@ -296,24 +291,6 @@ export default function SpecialistSignupPage() {
                   />
                 </div>
 
-                <div className="space-y-2">
-                  <Label htmlFor="profession">{t("profession")}</Label>
-                  <Select
-                    value={formData.profession}
-                    onValueChange={(value) => handleInputChange("profession", value)}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Pasirinkite profesiją" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {professionsList.map((profession) => (
-                        <SelectItem key={profession} value={profession}>
-                          {profession}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div className="space-y-2">
