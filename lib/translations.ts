@@ -201,6 +201,9 @@ export const translations = {
     attachFiles: "Attach Files",
     filesAttached: "{{count}} files attached",
     openInEmailClient: "Open in Email Client",
+    downloadEmailTemplate: "Download Email Template",
+    attachedFilesNote: "Please attach the following files to your email:",
+    filesAttachedInstructions: "Email template downloaded! Please open the template file, copy the content to your email client, and manually attach the files listed in the message.",
     inquiryFromInTouch: "Inquiry from InTouch",
 
     // Errors and Validation
@@ -608,6 +611,9 @@ export const translations = {
     attachFiles: "Pridėti failus",
     filesAttached: "Pridėta failų: {{count}}",
     openInEmailClient: "Atidaryti el. pašto kliente",
+    downloadEmailTemplate: "Atsisiųsti el. pašto šabloną",
+    attachedFilesNote: "Prašome pridėti šiuos failus prie el. laiško:",
+    filesAttachedInstructions: "El. pašto šablonas atsisiųstas! Prašome atidaryti šablono failą, nukopijuoti turinį į savo el. pašto klientą ir rankiniu būdu pridėti failus, išvardytus žinutėje.",
     inquiryFromInTouch: "Užklausa iš InTouch",
 
     // Errors and Validation

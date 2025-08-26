@@ -195,36 +195,46 @@ export default function SpecialistsPage() {
     if (selectedEmails.length > 0 && message.trim()) {
       const to = selectedEmails.join(";")
       const subject = t("inquiryFromInTouch")
-      const body = message
-      
-      // Build mailto URL with proper attachment handling
-      let link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
-      
-      // Add file attachments using attachment parameter
+      let body = message
+
+      // Add file attachment instructions to the message body
       if (attachedFiles.length > 0) {
-        const attachmentParams = attachedFiles.map(file => {
-          // Create object URL for the file
-          const fileUrl = URL.createObjectURL(file)
-          return `attachment=${encodeURIComponent(fileUrl)}`
-        }).join('&')
-        link += `&${attachmentParams}`
+        body += "\n\n" + t("attachedFilesNote") + "\n"
+        attachedFiles.forEach((file, index) => {
+          body += `${index + 1}. ${file.name}\n`
+        })
       }
-      
+
+      const link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
       setMailtoLink(link)
     } else {
       setMailtoLink("")
     }
   }, [selectedEmails, message, attachedFiles, t])
 
-  // Clean up object URLs when component unmounts or files change
-  useEffect(() => {
-    return () => {
-      attachedFiles.forEach(file => {
-        const fileUrl = URL.createObjectURL(file)
-        URL.revokeObjectURL(fileUrl)
+  const downloadEmailTemplate = () => {
+    const to = selectedEmails.join(";")
+    const subject = t("inquiryFromInTouch")
+    let body = message
+
+    if (attachedFiles.length > 0) {
+      body += "\n\n" + t("attachedFilesNote") + "\n"
+      attachedFiles.forEach((file, index) => {
+        body += `${index + 1}. ${file.name}\n`
       })
     }
-  }, [attachedFiles])
+
+    const emailContent = `To: ${to}\nSubject: ${subject}\n\n${body}`
+    const blob = new Blob([emailContent], { type: 'text/plain' })
+    const url = URL.createObjectURL(blob)
+    const a = document.createElement('a')
+    a.href = url
+    a.download = 'email-template.txt'
+    document.body.appendChild(a)
+    a.click()
+    document.body.removeChild(a)
+    URL.revokeObjectURL(url)
+  }
 
   // Handle search input changes
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -362,8 +372,16 @@ export default function SpecialistsPage() {
 
     // Clear error and open email client
     setError("")
-    if (mailtoLink) {
-      window.open(mailtoLink, "_blank")
+    
+    if (attachedFiles.length > 0) {
+      // If files are attached, download template and show instructions
+      downloadEmailTemplate()
+      alert(t("filesAttachedInstructions"))
+    } else {
+      // If no files, use regular mailto
+      if (mailtoLink) {
+        window.open(mailtoLink, "_blank")
+      }
     }
   }
 
@@ -813,7 +831,10 @@ export default function SpecialistsPage() {
                 className="w-full text-lg py-6 bg-blue-600 hover:bg-blue-700"
               >
                 <Mail className="mr-2 h-5 w-5" />
-                {t("openInEmailClient")} ({selectedEmails.length})
+                {attachedFiles.length > 0 
+                  ? t("downloadEmailTemplate") 
+                  : t("openInEmailClient")
+                } ({selectedEmails.length})
               </Button>
             </CardContent>
           </Card>
