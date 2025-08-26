@@ -166,10 +166,58 @@ export default function SpecialistsPage() {
   }, [allSpecialists, searchTerm, selectedCategories, specialistType, selectedCities, selectedServices])
 
   useEffect(() => {
-    // Auto-select all filtered specialists when filters change or when specialists are first loaded
-    const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
-    setSelectedEmails(allFilteredEmails)
-  }, [filteredSpecialists]) // Include filteredSpecialists to auto-select when data loads or filters change
+    // Auto-select all filtered specialists only when data loads or non-search filters change
+    // Don't auto-select when only search term changes to preserve manual selections
+    if (allSpecialists.length > 0) {
+      const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
+      
+      // Only auto-select if this is initial load or if search term is empty
+      if (selectedEmails.length === 0 || searchTerm.trim() === '') {
+        setSelectedEmails(allFilteredEmails)
+      } else {
+        // When searching, only add newly visible specialists that aren't already in selection
+        // and remove specialists that are no longer visible due to filters (but not search)
+        const currentlyVisible = new Set(allFilteredEmails)
+        const shouldKeep = selectedEmails.filter(email => {
+          // Keep if still visible, or if hidden only due to search (not other filters)
+          if (currentlyVisible.has(email)) return true
+          
+          // Check if this email would be visible without search filter
+          const specialist = allSpecialists.find(s => s.email === email)
+          if (!specialist) return false
+          
+          const categoryMatch = selectedCategories.length === 0 || 
+            selectedCategories.some(cat => specialist.categories.includes(cat))
+          const typeMatch = specialist.type === specialistType
+          const cityMatch = selectedCities.length === 0 || 
+            specialist.locations.length === 0 || 
+            selectedCities.some(city => specialist.locations.includes(city))
+          
+          let serviceMatch = true
+          if (selectedCategories.length > 0) {
+            const categoryHasSelectedServices = selectedCategories.some(
+              cat => selectedServices[cat] && selectedServices[cat].length > 0
+            )
+            if (categoryHasSelectedServices) {
+              const hasMatchingCategory = selectedCategories.some(cat => specialist.categories.includes(cat))
+              if (hasMatchingCategory) {
+                const relevantServices = selectedCategories
+                  .filter(cat => specialist.categories.includes(cat))
+                  .flatMap(cat => selectedServices[cat] || [])
+                if (relevantServices.length > 0) {
+                  serviceMatch = relevantServices.some(service => specialist.services.includes(service))
+                }
+              }
+            }
+          }
+          
+          return categoryMatch && typeMatch && cityMatch && serviceMatch
+        })
+        
+        setSelectedEmails(shouldKeep)
+      }
+    }
+  }, [allSpecialists, selectedCategories, specialistType, selectedCities, selectedServices, searchTerm])
 
   useEffect(() => {
     if (selectedEmails.length > 0 && message.trim()) {
