@@ -9,6 +9,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert"
 import { LanguageSelector } from "@/components/language-selector"
 import { PasswordStrength, isPasswordStrong } from "@/components/password-strength"
@@ -30,6 +31,29 @@ const lithuanianCities = [
   "Mažeikiai",
   "Jonava",
   "Utena",
+]
+
+const professionsList = [
+  "Santechnikas",
+  "Elektrikas", 
+  "Programuotojas",
+  "Dizaineris",
+  "Fotografas",
+  "Buhalteris",
+  "Teisininkas",
+  "Architekturas",
+  "Inžinierius",
+  "Mokytojas",
+  "Treneris",
+  "Masažuotojas",
+  "Kirpėjas",
+  "Kosmetologas",
+  "Vertėjas",
+  "Konsultantas",
+  "Remontuotojas",
+  "Valytojas",
+  "Vairuotojas",
+  "Kita"
 ]
 
 export default function SpecialistSignupPage() {
@@ -274,13 +298,21 @@ export default function SpecialistSignupPage() {
 
                 <div className="space-y-2">
                   <Label htmlFor="profession">{t("profession")}</Label>
-                  <Input
-                    id="profession"
+                  <Select
                     value={formData.profession}
-                    onChange={(e) => handleInputChange("profession", e.target.value)}
-                    placeholder="Pvz.: Santechnikas, Programuotojas, Dizaineris"
-                    required
-                  />
+                    onValueChange={(value) => handleInputChange("profession", value)}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Pasirinkite profesiją" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {professionsList.map((profession) => (
+                        <SelectItem key={profession} value={profession}>
+                          {profession}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
