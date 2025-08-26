@@ -58,7 +58,6 @@ export const serviceCategories = {
     "Oro transportas, aviacija",
     "Pagalba kelyje",
     "Padangos, ratlankiai",
-    "Sunkveržimių pardavimas, dalys",
     "Vandens transportas",
   ],
   "Energetika, žaliavos, kuras": [
