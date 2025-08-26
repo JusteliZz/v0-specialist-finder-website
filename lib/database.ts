@@ -42,7 +42,6 @@ export const serviceCategories = {
     "Automobilių nuoma",
     "Automobilių prekyba",
     "Automobilių techninė apžiūra",
-    "Vandens transportas",
     "Automobilių parkavimas",
     "Automobilių pervežimas",
     "Automobilių remontas",
@@ -58,6 +57,7 @@ export const serviceCategories = {
     "Oro transportas, aviacija",
     "Pagalba kelyje",
     "Padangos, ratlankiai",
+    "Vandens transportas",
   ],
   "Energetika, žaliavos, kuras": [
     "Elektros energijos tiekimas",
