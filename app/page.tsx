@@ -147,7 +147,7 @@ export default function HomePage() {
               <Button
                 size="lg"
                 variant="outline"
-                className="text-blue-600 border-2 border-blue-600 hover:bg-blue-50 text-lg px-10 py-4 rounded-lg font-semibold transition-all duration-200"
+                className="text-blue-600 border-blue-600 hover:bg-blue-50 text-lg px-10 py-4 rounded-lg font-semibold transition-all duration-200"
               >
                 {language === "lt" ? "Peržiūrėti prenumeratos planus" : "View subscription plans"}
               </Button>
