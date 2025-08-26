@@ -195,21 +195,36 @@ export default function SpecialistsPage() {
     if (selectedEmails.length > 0 && message.trim()) {
       const to = selectedEmails.join(";")
       const subject = t("inquiryFromInTouch")
-
-      let body = message
+      const body = message
+      
+      // Build mailto URL with proper attachment handling
+      let link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      
+      // Add file attachments using attachment parameter
       if (attachedFiles.length > 0) {
-        body += "\n\nAttached Files:\n"
-        attachedFiles.forEach((file) => {
-          body += `- ${file.name} (${(file.size / 1024).toFixed(1)} KB)\n`
-        })
+        const attachmentParams = attachedFiles.map(file => {
+          // Create object URL for the file
+          const fileUrl = URL.createObjectURL(file)
+          return `attachment=${encodeURIComponent(fileUrl)}`
+        }).join('&')
+        link += `&${attachmentParams}`
       }
-
-      const link = `mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`
+      
       setMailtoLink(link)
     } else {
       setMailtoLink("")
     }
   }, [selectedEmails, message, attachedFiles, t])
+
+  // Clean up object URLs when component unmounts or files change
+  useEffect(() => {
+    return () => {
+      attachedFiles.forEach(file => {
+        const fileUrl = URL.createObjectURL(file)
+        URL.revokeObjectURL(fileUrl)
+      })
+    }
+  }, [attachedFiles])
 
   // Handle search input changes
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
