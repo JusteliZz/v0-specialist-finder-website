@@ -85,6 +85,17 @@ export default function HomePage() {
                 </Button>
               </Link>
             </div>
+            <div className="flex justify-center mt-6">
+              <Link href="/signup-specialist">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="text-blue-600 border-blue-600 hover:bg-blue-50 text-lg px-8 py-6 rounded-xl"
+                >
+                  {t("joinAsSpecialist")}
+                </Button>
+              </Link>
+            </div>
           </div>
         </section>
 
