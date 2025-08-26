@@ -166,12 +166,12 @@ export default function SpecialistsPage() {
   }, [allSpecialists, searchTerm, selectedCategories, specialistType, selectedCities, selectedServices])
 
   useEffect(() => {
-    if (allSpecialists.length > 0 && selectedEmails.length === 0 && filteredSpecialists.length > 0) {
-      // Only auto-select on initial load when no selections exist
+    if (allSpecialists.length > 0 && selectedEmails.length === 0) {
+      // Auto-select all filtered specialists on initial load
       const allFilteredEmails = filteredSpecialists.map((s) => s.email).filter(Boolean) as string[]
       setSelectedEmails(allFilteredEmails)
     }
-  }, [allSpecialists, filteredSpecialists])
+  }, [allSpecialists, filteredSpecialists, specialistType])
 
   useEffect(() => {
     if (selectedEmails.length > 0 && message.trim()) {
