@@ -168,7 +168,7 @@ export default function ServicesPage() {
                     <SelectValue placeholder={t("selectCategory")} />
                   </SelectTrigger>
                   <SelectContent>
-                    {serviceCategories.map((cat) => (
+                    {Object.keys(serviceCategories).map((cat) => (
                       <SelectItem key={cat} value={cat}>
                         {t(cat as any)}
                       </SelectItem>

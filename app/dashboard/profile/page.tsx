@@ -288,7 +288,7 @@ export default function ProfilePage() {
                   <div className="space-y-4">
                     <Label className="text-base font-semibold">{t("serviceCategories")}</Label>
                     <div className="space-y-3">
-                      {serviceCategories.map((category) => (
+                      {Object.keys(serviceCategories).map((category) => (
                         <div key={category} className="space-y-2">
                           <div className="flex items-center space-x-2">
                             <Checkbox
