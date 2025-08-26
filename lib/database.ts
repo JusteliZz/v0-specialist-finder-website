@@ -32,11 +32,8 @@ export interface SpecialistProfile {
 
 // --- PREDEFINED SERVICES ---
 // Universal service categories for all specialists
-export const serviceCategories = [
-  "Automobiliai, transportas",
-  "Energetika, žaliavos, kuras",
-  "Finansai, teisė, draudimas",
-  "Kompiuteriai, IT technologijos",
+export const serviceCategories = {
+  "Automobiliai, transportas": [
     "Akumuliatoriai",
     "Autobusų, mikroautobusų nuoma",
     "Automobilių garso ir apsaugos sistemos",
@@ -141,7 +138,7 @@ export const serviceCategories = [
     "Grožio paslaugos",
     "Veterinarijos paslaugos",
   ],
-  Paslaugos: [
+  "Paslaugos": [
     "Valymo paslaugos",
     "Apsaugos paslaugos",
     "Logistikos paslaugos",
