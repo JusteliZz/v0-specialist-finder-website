@@ -264,12 +264,6 @@ export default function SignupPage() {
           color="blue"
         />
         <RoleCard
-          icon={<User className="h-8 w-8" />}
-          title={t("iAmIndividualSpecialist")}
-          onClick={() => handleRoleSelect("individual_specialist")}
-          color="green"
-        />
-        <RoleCard
           icon={<Building className="h-8 w-8" />}
           title={language === "lt" ? "Esu specialistas (juridinis asmuo)" : "I'm a specialist (legal entity)"}
           onClick={() => handleRoleSelect("business_specialist")}
