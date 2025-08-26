@@ -19,14 +19,7 @@ import { useLanguage } from "@/lib/language-context"
 import { useAuth } from "@/lib/auth-context"
 import { useErrorScroll } from "@/hooks/use-error-scroll"
 import { useEnterKey } from "@/hooks/use-enter-key"
-import {
-  db,
-  individualServiceCategories,
-  businessServiceCategories,
-  individualPredefinedServices,
-  businessPredefinedServices,
-  type FullSpecialistProfile,
-} from "@/lib/database"
+import { db, serviceCategories, predefinedServices, type FullSpecialistProfile } from "@/lib/database"
 import { LogOut, Mail, AlertCircle, Search } from "lucide-react"
 
 const lithuanianCities = [
@@ -116,18 +109,6 @@ export default function SpecialistsPage() {
     return suggestions
   }, [allSpecialists, searchTerm, selectedEmails])
 
-  // Get the appropriate categories and services based on specialist type filter
-  const getServiceCategories = () => {
-    if (specialistType === "individual") return individualServiceCategories
-    if (specialistType === "business") return businessServiceCategories
-    return [...individualServiceCategories, ...businessServiceCategories]
-  }
-
-  const getPredefinedServices = () => {
-    if (specialistType === "individual") return individualPredefinedServices
-    if (specialistType === "business") return businessPredefinedServices
-    return { ...individualPredefinedServices, ...businessPredefinedServices }
-  }
 
   const filteredSpecialists = useMemo(() => {
     return allSpecialists.filter((specialist) => {
@@ -381,11 +362,10 @@ export default function SpecialistsPage() {
     return null
   }
 
-  const serviceCategories = getServiceCategories().map((category) => ({
+  const serviceCategoriesForDisplay = serviceCategories.map((category) => ({
     key: category,
     label: t(category as any),
   }))
-  const predefinedServices = getPredefinedServices()
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -435,7 +415,7 @@ export default function SpecialistsPage() {
                 <div>
                   <Label className="text-base font-semibold mb-4 block">{t("serviceCategories")}</Label>
                   <div className="space-y-3">
-                    {serviceCategories.map((category) => (
+                    {serviceCategoriesForDisplay.map((category) => (
                       <div key={category.key} className="space-y-2">
                         <div className="flex items-center space-x-2">
                           <Checkbox

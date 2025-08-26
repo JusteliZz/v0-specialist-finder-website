@@ -17,7 +17,7 @@ import { useLanguage } from "@/lib/language-context"
 import { useAuth } from "@/lib/auth-context"
 import { useErrorScroll } from "@/hooks/use-error-scroll"
 import { useEnterKey } from "@/hooks/use-enter-key"
-import { db, individualServiceCategories, individualPredefinedServices } from "@/lib/database"
+import { db, serviceCategories, predefinedServices } from "@/lib/database"
 import { Loader2, AlertCircle } from "lucide-react"
 
 const lithuanianCities = [
