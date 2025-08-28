@@ -70,7 +70,13 @@ export default function SpecialistsPage() {
     if (user) {
       db.specialists
         .getAll()
-        .then(setAllSpecialists)
+        .then((specialists) => {
+          // Deduplicate specialists by userId to prevent React key conflicts
+          const uniqueSpecialists = specialists.filter((specialist, index, array) => 
+            array.findIndex(s => s.userId === specialist.userId) === index
+          )
+          setAllSpecialists(uniqueSpecialists)
+        })
         .catch((error) => {
           console.error("Error fetching specialists:", error)
           setError(t("errorFetchingSpecialists"))
