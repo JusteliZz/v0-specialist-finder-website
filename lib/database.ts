@@ -1106,11 +1106,11 @@ const specialistProfiles: SpecialistProfile[] = [
   {
     userId: "user_27",
     type: "business",
-    profession: "Autobusų nuoma",
+    profession: "Mikroautobusų nuoma",
     categories: ["Automobiliai, transportas"],
-    locations: ["Šiauliai"],
+    locations: ["Šiauliai"], // Telšių r. -> Šiauliai apskritis
     phone: "+37037000027",
-    description: "Aušra kelyje, MB - autobusų ir mikroautobusų nuomos paslaugos Telšių rajone.",
+    description: "Aušra kelyje, MB - mikroautobusų nuomos paslaugos Telšių rajone.",
     services: ["Autobusų, mikroautobusų nuoma"],
     hourlyRate: 45,
     experience: 8,
@@ -1134,11 +1134,11 @@ const specialistProfiles: SpecialistProfile[] = [
   {
     userId: "user_29",
     type: "business",
-    profession: "Transporto paslaugos",
+    profession: "Laidojimo paslaugos",
     categories: ["Automobiliai, transportas"],
     locations: ["Kaunas"],
     phone: "+37037000029",
-    description: "Užuojauta, UAB - autobusų nuomos ir transporto paslaugos Kaune.",
+    description: "Užuojauta, UAB - laidojimo paslaugos ir transporto organizavimas Kaune.",
     services: ["Autobusų, mikroautobusų nuoma"],
     hourlyRate: 42,
     experience: 10,
