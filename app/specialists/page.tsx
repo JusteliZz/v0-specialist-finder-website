@@ -649,19 +649,12 @@ export default function SpecialistsPage() {
                         className="mt-1"
                       />
                       <Label htmlFor={`email-${specialist.userId}`} className="font-normal cursor-pointer flex-grow">
-                        <span
-                          className="block font-semibold truncate"
-                          title={
-                            specialist.type === "business"
-                              ? specialist.companyName
-                              : `${specialist.firstName} ${specialist.lastName}`
-                          }
-                        >
+                        <span className="block font-semibold leading-tight break-words">
                           {specialist.type === "business"
                             ? specialist.companyName
                             : `${specialist.firstName} ${specialist.lastName}`}
                         </span>
-                        <span className="block text-sm text-gray-500 truncate" title={specialist.email}>
+                        <span className="block text-sm text-gray-500 break-all" title={specialist.email}>
                           {specialist.email}
                         </span>
                         <span className="block text-xs text-gray-400">
