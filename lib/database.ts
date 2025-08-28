@@ -998,7 +998,7 @@ const specialistProfiles: SpecialistProfile[] = [
     locations: ["Panevėžys"],
     phone: "+37037000006",
     description: "ARV SERVICE, UAB - automobilių servisas specializuojantis akumuliatorių srityje Panevėžyje.",
-    services: ["Akumuliatoriai"],
+    services: ["Akumuliatoriai", "Autokosmetika"],
     hourlyRate: 36,
     experience: 9,
     verified: true,
