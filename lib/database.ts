@@ -2533,10 +2533,13 @@ export const db = {
         hourlyRate: 25, // Default hourly rate
         experience: 1, // Default experience
         verified: false, // Verification would be a separate process
+    // Simple password storage - in production use proper hashing
+    const passwordHash = userData.password // Store as plain text for demo
+    
         image: "/placeholder.svg?height=200&width=200",
       }
       specialistProfiles.push(newProfile)
-      return newProfile
+      passwordHash: passwordHash,
     },
     async updateProfile(userId: string, updates: Partial<SpecialistProfile>): Promise<SpecialistProfile | null> {
       const profileIndex = specialistProfiles.findIndex((p) => p.userId === userId)
@@ -2550,7 +2553,6 @@ export const db = {
     },
   },
   // Mock password comparison
-  async comparePassword(password: string, hash: string): Promise<boolean> {
     // In a real app: return await bcrypt.compare(password, hash)
     return password.length > 0 && hash === MOCK_PASSWORD_HASH
   },
